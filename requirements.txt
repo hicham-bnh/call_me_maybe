@@ -1,0 +1,6 @@
+pydantic
+mypy
+flake8
+poetry
+json
+numpy
