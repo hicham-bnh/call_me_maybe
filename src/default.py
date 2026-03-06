@@ -1,5 +1,6 @@
 from llm_sdk import Small_LLM_Model
 import os
+import argparse
 
 
 def result_input(folder: str | None):
@@ -25,6 +26,6 @@ def result_input(folder: str | None):
             print(e)
         try:
             with open(f'{output[0]}/{output[1]}/function_calls.json', 'w') as fd:
-                fd.write("test")
+                fd.write("")
         except Exception as e:
             print(e)
