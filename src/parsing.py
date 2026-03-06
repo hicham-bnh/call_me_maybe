@@ -16,9 +16,4 @@ def pars_files():
         default="data/output/functions_calls.json"
     )
     args = parser.parse_args()
-    print("Functions:", args.functions_definition)
-    print("Input:", args.input)
-    print("Output:", args.output)
-    with open(args.functions_definition, "r") as fd:
-        test = fd.read()
     result_input(args.output)

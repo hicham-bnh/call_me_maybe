@@ -26,6 +26,6 @@ def result_input(folder: str | None):
             print(e)
         try:
             with open(f'{output[0]}/{output[1]}/function_calls.json', 'w') as fd:
-                fd.write("")
+                fd.write("reussi")
         except Exception as e:
             print(e)
