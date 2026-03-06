@@ -1,12 +1,37 @@
-"first test reussi"[
+{
+   "test": 1
+}[
    {
-      "hello": 4,
-      "hicham": "bg",
-      "tfo": 20.12
+      "element": "What is the sum of 2 and 3?"
    },
    {
-      "maximart": 8,
-      "sunny": 20,
-      "mobenias": 0.1
+      "element": "What is the sum of 265 and 345?"
+   },
+   {
+      "element": "Greet shrek"
+   },
+   {
+      "element": "Greet john"
+   },
+   {
+      "element": "Reverse the string 'hello'"
+   },
+   {
+      "element": "Reverse the string 'world'"
+   },
+   {
+      "element": "What is the square root of 16?"
+   },
+   {
+      "element": "Calculate the square root of 144"
+   },
+   {
+      "element": "Replace all numbers in \"Hello 34 I'm 233 years old\" with NUMBERS"
+   },
+   {
+      "element": "Replace all vowels in 'Programming is fun' with asterisks"
+   },
+   {
+      "element": "Substitute the word 'cat' with 'dog' in 'The cat sat on the mat with another cat'"
    }
 ]

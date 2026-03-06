@@ -1,5 +1,6 @@
 from src.default import files
 import argparse
+from typing import List
 import json
 
 class Parsing:
@@ -26,8 +27,14 @@ class Parsing:
         self.intput_call = args.input
         self.output_file = args.output
         file_lunch.lunch(self.output_file)
-        file_lunch.add_to_ouput_file()
         with open(self.intput_call, "r") as f:
             data = json.load(f)
+        datas_call: List = []
+        for i in range(len(data)):
+            tmp ={
+                "element": f"{data[i]['prompt']}"
+            }
+            datas_call.append(tmp)
+        file_lunch.add_to_ouput_file(datas_call)
         with open(self.intput_function, "r") as f:
             func = json.load(f)
