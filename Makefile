@@ -2,11 +2,11 @@ PYTHON := python3
 PIP := pip
 POETRY := poetry
 CD := cd
-MAIN_SCRIPT := call_me_maybe.py
+MAIN_SCRIPT := src
 PROJECT_NAME := call_me_maybe
 VENV := .VENV
 REQUIREMENTS := requirements
-FILE := 
+FILE := __main__.py
 
 help:
 	@echo "Available commands:"
