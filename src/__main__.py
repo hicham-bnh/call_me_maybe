@@ -1,7 +1,8 @@
 import sys
 import argparse
-from src.parsing import pars_files
+from src.parsing import Parsing
 
 
 if __name__ == "__main__":
-        pars_files()
+        pars = Parsing()
+        pars.pars_files()
