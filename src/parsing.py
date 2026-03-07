@@ -1,7 +1,9 @@
 from src.default import files
 import argparse
-from typing import List
+from typing import List, Dict
 import json
+from pydantic import BaseModel
+
 
 class Parsing:
     intput_function: str
@@ -29,12 +31,9 @@ class Parsing:
         file_lunch.lunch(self.output_file)
         with open(self.intput_call, "r") as f:
             data = json.load(f)
-        datas_call: List = []
-        for i in range(len(data)):
-            tmp ={
-                "element": f"{data[i]['prompt']}"
-            }
-            datas_call.append(tmp)
-        file_lunch.add_to_ouput_file(datas_call)
+        for l in data:
+            print(l['prompt'])
         with open(self.intput_function, "r") as f:
             func = json.load(f)
+        for f in func:
+            print(f['name'])
