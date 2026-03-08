@@ -1,3 +1,19 @@
-{
-   "test": 1
-}
+[
+   {
+      "test": 1,
+      "mobenais": "present",
+      "mteriier": "present",
+      "jsam": "present",
+      "mobenhab": "present"
+   },
+   {
+      "hicham": "mobenhab",
+      "djalil": "mobenais",
+      "jsam": "jsam",
+      "maoake": "meteriier"
+   },
+   {
+      "tfou": 4,
+      "hmar": 10
+   }
+]

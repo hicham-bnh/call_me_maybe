@@ -31,9 +31,6 @@ class Parsing:
         file_lunch.lunch(self.output_file)
         with open(self.intput_call, "r") as f:
             data = json.load(f)
-        for l in data:
-            print(l['prompt'])
         with open(self.intput_function, "r") as f:
             func = json.load(f)
-        for f in func:
-            print(f['name'])
+        return data, func
