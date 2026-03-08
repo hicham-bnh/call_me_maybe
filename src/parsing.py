@@ -3,6 +3,7 @@ import argparse
 from typing import List, Dict, Any
 import json
 from pydantic import BaseModel
+from llm_sdk import Small_LLM_Model
 
 
 class Parsing:
@@ -40,10 +41,8 @@ class Parsing:
         self.function_format()
 
     def function_format(self):
-        result = []
-        for f in self.data_func:
-            name = f['name']
-            dscp = f['description']
-            params = ", ".join(f['parameters'].keys())
-            result.append(f"-{name}({params}): {dscp}")
-        print(result)
+        test = Small_LLM_Model()
+        input_id = test.encode("The capital of France is")[0].tolist()
+        logits = test.get_logits_from_input_ids(input_id)
+        best = logits.index(max(logits))
+        print(test.decode([best]))
