@@ -38,11 +38,3 @@ class Parsing:
             self.data_call = json.load(f)
         with open(self.intput_function, "r") as f:
             self.data_func = json.load(f)
-        self.function_format()
-
-    def function_format(self):
-        test = Small_LLM_Model()
-        input_id = test.encode("The capital of France is")[0].tolist()
-        logits = test.get_logits_from_input_ids(input_id)
-        best = logits.index(max(logits))
-        print(test.decode([best]))

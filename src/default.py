@@ -14,6 +14,16 @@ class files:
             self.ouput_file = f"{output[0]}/{output[1]}/function_calls.json"
         except Exception as e:
             print(e)
+        d1 = {
+            "rien": 0
+        }
+        d2 = {
+            "tout": 1
+        }
+        data = []
+        data.append(d1)
+        data.append(d2)
+        self.add_to_ouput_file(data)
 
     def add_to_ouput_file(self, data: List):
         try:
