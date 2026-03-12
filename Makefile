@@ -1,4 +1,5 @@
-PYTHON := python3
+PYTHON := python
+PYTHON3 := python3
 PIP := pip
 POETRY := poetry
 CD := cd
@@ -6,13 +7,14 @@ MAIN_SCRIPT := src
 PROJECT_NAME := call_me_maybe
 VENV := .VENV
 REQUIREMENTS := requirements
-FILE := __main__.py
+UV := uv
+RUN := run
 
 help:
 	@echo "Available commands:"
 	@echo " make setup                            - Creat virtual environment and install build tools"
 	@echo " make install                          - Install project dependencies"
-	@echo " make run <Optional FILE=filename>     - Execute the main script"
+	@echo " make run      - Execute the main script"
 	@echo " make debug                            - Run the main script in debug mode (pdb)"
 	@echo " make clean                            - Remove temporary files and caches"
 	@echo " make fclean                           - Remove temporary files, caches and virtual environmnet"
@@ -27,10 +29,10 @@ install:
 	$(CD) llm_sdk && $(POETRY) install
 
 run:
-	$(PYTHON) $(MAIN_SCRIPT) $(FILE)
+	$(UV) $(RUN) $(PYTHON) -m src
 
 debug:
-	$(PYTHON) -m pdb $(MAIN_SCRIPT) $(FILE)
+	$(PYTHON3) -m pdb $(MAIN_SCRIPT) $(FILE)
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
@@ -56,7 +58,7 @@ lint-strict:
 
 setup:
 	@rm -rf $(VENV) 2>/dev/null || true
-	$(PYTHON) -m venv $(VENV) --without-pip
+	$(PYTHON3) -m venv $(VENV) --without-pip
 	curl -sS https://bootstrap.pypa.io/get-pip.py | $(VENV)/bin/python
 	$(VENV)/bin/pip install --upgrade pip setuptools wheel build
 	@echo ""

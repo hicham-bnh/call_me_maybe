@@ -1,9 +1,10 @@
 from llm_sdk import Small_LLM_Model
 import os
-from typing import List
+from typing import List, Any
 import json
+import torch
 
-class files:
+class Files:
     ouput_file: str
     def lunch(self, folder: str) -> None:
         output: List[str] = folder.split("/")
@@ -14,21 +15,11 @@ class files:
             self.ouput_file = f"{output[0]}/{output[1]}/function_calls.json"
         except Exception as e:
             print(e)
-        d1 = {
-            "rien": 0
-        }
-        d2 = {
-            "tout": 1
-        }
-        data = []
-        data.append(d1)
-        data.append(d2)
-        self.add_to_ouput_file(data)
 
     def add_to_ouput_file(self, data: List):
         try:
             with open(self.ouput_file , "w") as fd:
-                json.dump(data, fd, indent=3)
+                json.dump(data, fd, indent=2)
         except Exception as e:
             print(e)
             

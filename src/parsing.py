@@ -1,4 +1,4 @@
-from src.default import files
+from src.default import Files
 import argparse
 from typing import List, Dict, Any
 import json
@@ -15,7 +15,7 @@ class Parsing:
         self.data_func: Any
 
     def pars_files(self):
-        file_lunch = files()
+        file_lunch = Files()
         parser = argparse.ArgumentParser()
         parser.add_argument(
             "--functions_definition",
@@ -38,3 +38,4 @@ class Parsing:
             self.data_call = json.load(f)
         with open(self.intput_function, "r") as f:
             self.data_func = json.load(f)
+        return self.data_call, self.data_func
