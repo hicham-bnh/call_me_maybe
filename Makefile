@@ -14,7 +14,7 @@ help:
 	@echo "Available commands:"
 	@echo " make setup                            - Creat virtual environment and install build tools"
 	@echo " make install                          - Install project dependencies"
-	@echo " make run      - Execute the main script"
+	@echo " make run                              - Execute the main script"
 	@echo " make debug                            - Run the main script in debug mode (pdb)"
 	@echo " make clean                            - Remove temporary files and caches"
 	@echo " make fclean                           - Remove temporary files, caches and virtual environmnet"

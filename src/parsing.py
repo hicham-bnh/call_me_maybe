@@ -3,16 +3,16 @@ import argparse
 from typing import List, Dict, Any
 import json
 from pydantic import BaseModel
-from llm_sdk import Small_LLM_Model
+from enum import Enum
 
 
 class Parsing:
     def __init__(self) -> None:
-        self.intput_function: str = ""
-        self.intput_call: str = ""
-        self.output_file: str = ""
-        self.data_call: Any = None
-        self.data_func: Any = None
+        self.intput_function: str
+        self.intput_call: str
+        self.output_file: str
+        self.data_call: Any
+        self.data_func: Any
 
     def pars_files(self):
         try:
@@ -38,7 +38,30 @@ class Parsing:
             with open(self.intput_call, "r") as f:
                 self.data_call = json.load(f)
             with open(self.intput_function, "r") as f:
-                self.data_func = json.load(f)
+                data_func = json.load(f)
+            self.data_func = FunctionDefinitions(functions=data_func)
             return self.data_call, self.data_func
         except Exception as e:
             print(e)
+        return 0, 0
+
+class ParameterType(Enum):
+    NUMBER = 'number'
+    STRING = 'string'
+    BOOLEAN = 'boolean'
+    INTEGER = 'integer'
+
+class ParameterDefinition(BaseModel):
+    type: ParameterType
+
+class ReturnDefinition(BaseModel):
+    type: ParameterType
+
+class FunctionDefinition(BaseModel):
+    name: str
+    description: str
+    parameters: Dict[str, ParameterDefinition]
+    returns: ReturnDefinition
+
+class FunctionDefinitions(BaseModel):
+    functions: List[FunctionDefinition]

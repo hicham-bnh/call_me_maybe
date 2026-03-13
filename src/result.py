@@ -11,5 +11,7 @@ class Llm:
     def get_vocab(self):
         vocab_path = self.model.get_path_to_vocab_file()
         with open(vocab_path, encoding='utf-8') as fd:
-            data = json.load(fd)
-        self.vocab = {k: int(v) for k,v in data.items()}
+            self.vocab = json.load(fd)
+
+
+    
