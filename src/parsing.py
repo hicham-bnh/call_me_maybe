@@ -37,9 +37,10 @@ class Parsing:
             file_lunch.lunch(self.output_file)
             with open(self.intput_call, "r") as f:
                 self.data_call = json.load(f)
+            Calling(prompt=self.data_call)
             with open(self.intput_function, "r") as f:
-                data_func = json.load(f)
-            self.data_func = FunctionDefinitions(functions=data_func)
+                self.data_func = json.load(f)
+            FunctionDefinitions(functions=self.data_func)
             return self.data_call, self.data_func
         except Exception as e:
             print(e)
@@ -65,3 +66,6 @@ class FunctionDefinition(BaseModel):
 
 class FunctionDefinitions(BaseModel):
     functions: List[FunctionDefinition]
+
+class Calling(BaseModel):
+    prompt: List[Dict[str, str]]
