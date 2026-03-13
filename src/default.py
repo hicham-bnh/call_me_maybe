@@ -5,14 +5,15 @@ import json
 import torch
 
 class Files:
-    ouput_file: str
+    def __init__(self) -> None:
+        self.ouput_file: str = ""
+    
     def lunch(self, folder: str) -> None:
-        output: List[str] = folder.split("/")
         try:
-            parent_folder = output[0]
-            new_folder = output[1]
-            os.makedirs(os.path.join(parent_folder, new_folder), exist_ok=True)
-            self.ouput_file = f"{output[0]}/{output[1]}/function_calls.json"
+            parent_folder = os.path.dirname(folder)
+            if parent_folder:
+                os.makedirs(parent_folder, exist_ok=True)
+            self.ouput_file = folder
         except Exception as e:
             print(e)
 
