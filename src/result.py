@@ -23,16 +23,4 @@ class Llm:
         tokens_functions = {
             name: self.model.encode(name) for name in self.pars.func_name
             }
-        for prompt in self.pars.call_obj.prompt:
-            prompt_text = prompt['prompt']
-            prompt_model = f"""
-                User request: {prompt_text}
-                Choose the best function:
-                """
-            input_id = self.model.encode(prompt_model)
-            logits = self.model.get_logits_from_input_ids(input_id)
-            first_tokens = [
-                tokens[0]
-                for tokens in tokens_functions.values()
-            ]
-                    
+        data = {k:v.tolist()[0] for k,v in tokens_functions.items()}
