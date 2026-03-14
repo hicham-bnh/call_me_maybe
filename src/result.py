@@ -5,12 +5,12 @@ from src.parsing import Parsing
 
 
 class Llm:
-    def __init__(self) -> None:
+    def __init__(self, pars: Parsing) -> None:
         self.model = Small_LLM_Model()
         self.vocab: Dict = {}
         self.token_to_id: Dict = {}
         self.id_to_token: Dict = {}
-        self.pars = Parsing()
+        self.pars = pars
 
     def get_vocab(self):
         vocab_path = self.model.get_path_to_vocab_file()
@@ -18,3 +18,11 @@ class Llm:
             self.vocab = json.load(fd)
         self.token_to_id = {v: k for k, v in self.vocab.items()}
         self.id_to_token = {k: v for k, v in self.vocab.items()}
+
+    def get_func(self):
+        call_obj = self.pars.call_obj
+        for trompt in call_obj:
+            tokens_functions = {
+                name: self.model.encode(name) for name in self.pars.func_name
+                }
+            
