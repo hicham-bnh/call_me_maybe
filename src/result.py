@@ -1,6 +1,8 @@
 from llm_sdk import Small_LLM_Model
 import json
 from typing import Dict
+from src.parsing import Parsing
+
 
 class Llm:
     def __init__(self) -> None:
@@ -8,7 +10,7 @@ class Llm:
         self.vocab: Dict = {}
         self.token_to_id: Dict = {}
         self.id_to_token: Dict = {}
-
+        self.pars = Parsing()
 
     def get_vocab(self):
         vocab_path = self.model.get_path_to_vocab_file()
@@ -16,5 +18,3 @@ class Llm:
             self.vocab = json.load(fd)
         self.token_to_id = {v: k for k, v in self.vocab.items()}
         self.id_to_token = {k: v for k, v in self.vocab.items()}
-
-    

@@ -1,13 +1,12 @@
-from llm_sdk import Small_LLM_Model
 import os
-from typing import List, Any
+from typing import List
 import json
 
 
 class Files:
     def __init__(self) -> None:
         self.ouput_file: str = ""
-    
+
     def lunch(self, folder: str) -> None:
         try:
             parent_folder = os.path.dirname(folder)
@@ -19,8 +18,7 @@ class Files:
 
     def add_to_ouput_file(self, data: List):
         try:
-            with open(self.ouput_file , "w") as fd:
+            with open(self.ouput_file, "w") as fd:
                 json.dump(data, fd, indent=2)
         except Exception as e:
             print(e)
-            

@@ -6,7 +6,7 @@ if __name__ == "__main__":
         try:
                 llm = Llm()
                 pars = Parsing()
-                call, func = pars.pars_files()
+                pars.pars_files()
                 llm.get_vocab()
         except Exception as e:
                 print(e)

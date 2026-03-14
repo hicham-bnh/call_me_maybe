@@ -8,11 +8,20 @@ from enum import Enum
 
 class Parsing:
     def __init__(self) -> None:
-        self.intput_function: str
-        self.intput_call: str
+        self.input_function: str
+        self.input_call: str
         self.output_file: str
         self.data_call: Any
         self.data_func: Any
+        self.call_obj: Any
+        self.func_obj: Any
+        self.func_name: List[str]
+        self.param_name_func: Dict[
+            str, List[str]
+            ]
+        self.param_type_func: Dict[
+            str, Dict[str, ParameterType]
+            ]
 
     def pars_files(self):
         try:
@@ -31,20 +40,33 @@ class Parsing:
                 default="data/output/functions_calls.json"
             )
             args = parser.parse_args()
-            self.intput_function = args.functions_definition
-            self.intput_call = args.input
+            self.input_function = args.functions_definition
+            self.input_call = args.input
             self.output_file = args.output
             file_lunch.lunch(self.output_file)
-            with open(self.intput_call, "r") as f:
+            with open(self.input_call, "r") as f:
                 self.data_call = json.load(f)
-            Calling(prompt=self.data_call)
-            with open(self.intput_function, "r") as f:
+            self.call_obj = Calling(prompt=self.data_call)
+            with open(self.input_function, "r") as f:
                 self.data_func = json.load(f)
-            FunctionDefinitions(functions=self.data_func)
+            self.func_obj = FunctionDefinitions(functions=self.data_func)
+            self.func_name = [
+                f.name for f in self.func_obj.functions
+                ]
+            self.param_name_func = {
+                f.name: list(
+                    f.parameters.keys()) for f in self.func_obj.functions
+                }
+            self.param_type_func = {
+                f.name: {
+                    k: v.type for k, v in f.parameters.items()
+                } for f in self.func_obj.functions
+            }
             return self.data_call, self.data_func
         except Exception as e:
             print(e)
         return 0, 0
+
 
 class ParameterType(Enum):
     NUMBER = 'number'
@@ -52,11 +74,14 @@ class ParameterType(Enum):
     BOOLEAN = 'boolean'
     INTEGER = 'integer'
 
+
 class ParameterDefinition(BaseModel):
     type: ParameterType
 
+
 class ReturnDefinition(BaseModel):
     type: ParameterType
+
 
 class FunctionDefinition(BaseModel):
     name: str
@@ -64,8 +89,10 @@ class FunctionDefinition(BaseModel):
     parameters: Dict[str, ParameterDefinition]
     returns: ReturnDefinition
 
+
 class FunctionDefinitions(BaseModel):
     functions: List[FunctionDefinition]
+
 
 class Calling(BaseModel):
     prompt: List[Dict[str, str]]
