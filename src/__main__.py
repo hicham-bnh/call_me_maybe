@@ -8,5 +8,6 @@ if __name__ == "__main__":
                 pars.pars_files()
                 llm = Llm(pars)
                 llm.get_vocab()
+                llm.get_func()
         except Exception as e:
                 print(e)

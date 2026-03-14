@@ -20,9 +20,19 @@ class Llm:
         self.id_to_token = {k: v for k, v in self.vocab.items()}
 
     def get_func(self):
-        call_obj = self.pars.call_obj
-        for trompt in call_obj:
-            tokens_functions = {
-                name: self.model.encode(name) for name in self.pars.func_name
-                }
-            
+        tokens_functions = {
+            name: self.model.encode(name) for name in self.pars.func_name
+            }
+        for prompt in self.pars.call_obj.prompt:
+            prompt_text = prompt['prompt']
+            prompt_model = f"""
+                User request: {prompt_text}
+                Choose the best function:
+                """
+            input_id = self.model.encode(prompt_model)
+            logits = self.model.get_logits_from_input_ids(input_id)
+            first_tokens = [
+                tokens[0]
+                for tokens in tokens_functions.values()
+            ]
+                    
