@@ -1,7 +1,0 @@
-pydantic
-mypy
-flake8
-poetry
-numpy
-jason
-uv
