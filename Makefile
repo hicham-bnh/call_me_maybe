@@ -27,7 +27,7 @@ install:
 	$(CD) llm_sdk && $(POETRY) install
 
 run:
-	$(PYTHON) $(MAIN_SCRIPT) $(FILE)
+	uv run python -m src
 
 debug:
 	$(PYTHON) -m pdb $(MAIN_SCRIPT) $(FILE)

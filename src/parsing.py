@@ -4,7 +4,7 @@ from typing import List
 from pathlib import Path
 import os
 
-class Pars:
+class Pars(BaseModel):
 	def default_pars(self) -> None:
 		parser = argparse.ArgumentParser()
 		parser.add_argument('--functions_definition',
@@ -16,8 +16,7 @@ class Pars:
 		args = parser.parse_args()
 		output = Path(args.output)
 		output.parent.mkdir(parents=True, exist_ok=True)
-		with output.open('w') as fd:
-			fd.write('{}')
+
 
 	def pars_file(self, files: List[str]) -> None:
 		parser = argparse.ArgumentParser()
@@ -30,5 +29,3 @@ class Pars:
 		args = parser.parse_args()
 		output = Path(args.output)
 		output.parent.mkdir(parents=True, exist_ok=True)
-		with output.open('w') as fd:
-			fd.write('{}')
