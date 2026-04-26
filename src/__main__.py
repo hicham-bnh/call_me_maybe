@@ -1,7 +1,12 @@
 import sys
+from .parsing import Pars
+
 
 if __name__ == "__main__":
-	try:
-		print(sys.argv[1])
-	except Exception as e:
-		print(e)
+    test = Pars()
+    if (len(sys.argv) == 1):
+        test.default_pars()
+    elif (len(sys.argv) == 7):
+        test.pars_file(sys.argv)
+    elif (len(sys.argv) != 4):
+        print("error")

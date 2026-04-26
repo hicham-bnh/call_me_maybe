@@ -1,7 +1,9 @@
 PYTHON = python3.10
 PIP = pip
+CD = cd
+POETRY = poetry
 MAIN_SCRIPT = main.py
-PROJECT_NAME = fly_in
+PROJECT_NAME = call_me_maybe
 VENV = .VENV
 REQUIREMENTS = requirements
 
@@ -22,6 +24,7 @@ help:
 install:
 	$(PIP) install --update pip setuptools wheel || true
 	$(PIP) install -r requirements.txt || echo "Warning: some packages from requirements.txt failed to install"
+	$(CD) llm_sdk && $(POETRY) install
 
 run:
 	$(PYTHON) $(MAIN_SCRIPT) $(FILE)
@@ -42,14 +45,14 @@ fclean:
 	@rm -rf $(VENV) 2>/dev/null || true
 
 lint:
-	$(PYTHON) -m flake8 . --exclude=.git,.VENV,venv,env,test_vm,build,dist,.mypy_cache,.pytest_cache,__pycache__,dependencies,src,*.egg-info
-	$(PYTHON) -m mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports \
-		--disallow-untyped-defs --check-untyped-defs --exclude='(build|dist|venv|env|dependencies|src)'
+	$(PYTHON) -m flake8 . --exclude=.git,llm_sdk,.VENV,venv,env,test_vm,build,dist,.mypy_cache,.pytest_cache,__pycache__,dependencies,*.egg-info
+	$(PYTHON) -m mypy . --exclude=llm_sdk --warn-return-any --warn-unused-ignores --ignore-missing-imports \
+		--disallow-untyped-defs --check-untyped-defs --exclude='(build|dist|venv|env|dependencies)'
 
 
 lint-strict:
-	$(PYTHON) -m flake8 . --exclude=.git,.VENV,venv,env,test_vm,build,dist,.mypy_cache,.pytest_cache,__pycache__,dependencies,src,*.egg-info
-	$(PYTHON) -m mypy . --strict --ignore-missing-imports --exclude='(build|dist|venv|env|dependencies|src)'
+	$(PYTHON) -m flake8 . --exclude=.git,llm_sdk,.VENV,venv,env,test_vm,build,dist,.mypy_cache,.pytest_cache,__pycache__,dependencies,*.egg-info
+	$(PYTHON) -m mypy . --exclude=llm_sdk --strict --ignore-missing-imports --exclude='(build|dist|venv|env|dependencies)'
 build: clean
 	$(PYTHON) -m pip install --update build setuptools wheel
 	$(PYTHON) -m build

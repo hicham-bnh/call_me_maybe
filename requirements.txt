@@ -1,3 +1,5 @@
 pydantic
 uv
-json
+flake8
+mypy
+poetry
