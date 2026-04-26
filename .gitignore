@@ -1,3 +1,4 @@
 .VENV
 __pycache__
 moulinette
+data/output
