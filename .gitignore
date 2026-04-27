@@ -1,4 +1,3 @@
 .VENV
 __pycache__
-moulinette
-data/output
+.mypy_cache
