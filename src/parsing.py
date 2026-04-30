@@ -37,8 +37,9 @@ class Pars:
 
 
 	
-	def open_files(self) -> None:
+	def open_files(self):
 		with open(self.args.input, "r", encoding='utf-8') as fd:
 			promps = [self.calling(**item) for item in json.load(fd)]
 		with open(self.args.functions_definition, "r", encoding='utf-8') as fd2:
 			call = [self.definition(**item) for item in json.load(fd2)]
+		return promps, call
