@@ -22,10 +22,21 @@ class Answer:
 		prompts, function = self.parser.open_files()
 		function_name = [definition.name for definition in function]
 		prompt_test = [prompt.prompt for prompt in prompts]
+		function_name_token = [self.llm.encode(name).tolist()[0] for name in function_name]
 		test = self.llm.encode(prompt_test[0]).tolist()[0]
 		logits = self.llm.get_logits_from_input_ids(test)
+		valid_tokens = set()
+		for tokens in function_name_token:
+			valid_tokens.add(tokens[0])
+		for token_id in range(len(logits)):
+			if token_id not in valid_tokens:
+				logits[token_id] = float('-inf')
 		big = logits.index(max(logits))
+		print(big)
 		print(prompt_test[0])
 		print(self.llm.decode([big]))
-		function_name_token = [self.llm.encode(name).tolist()[0] for name in function_name]
-		print(function_name_token)
+		#print(function_name_token)
+		#print(function_name_token[0])
+		#print(self.llm.decode([8822]))
+		#print(self.llm.decode([2891]))
+		#print(self.llm.decode([32964]))
